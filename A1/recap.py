@@ -30,12 +30,18 @@ process("Andrea,Barbara", "NotInList", "Bar")
 #Implement a procedure "toDict" that takes a list of names (as returned by "process" from Task1)
 #and returns a dictionary containing the names as keys and the number of characters of each respective name as value
 
-def toDict(names):
-    return None
+def toDict(xy):
+    ergebnis = {}
+    for names in xy: 
+        ergebnis[names] = len(names)
+    return ergebnis
+    
+a = ['Thomas', 'Michael', 'Thomas', 'Barbara', 'Susanne', 'Michael', 'Fabian']
+print (toDict(a))
 
 
 #Example:
-toDict(['Thomas', 'Michael', 'Thomas', 'Barbara', 'Susanne', 'Michael', 'Fabian'])
+#toDict(['Thomas', 'Michael', 'Thomas', 'Barbara', 'Susanne', 'Michael', 'Fabian'])
 #shall return {'Barbara': 7, 'Fabian': 6, 'Michael': 7, 'Susanne': 7, 'Thomas': 6} #note that the order might be different (why is this?)
 
 
