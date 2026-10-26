@@ -12,6 +12,11 @@
 
 #Important: use the slice operator, filter and lambda-expression!
 
+#Implementiere eine Funktion mit Names (string-kommagetrennt), last (ein String der in names vorkommen kann)
+#notStartingWith (ein String)
+#Der Rückgabewert ist eine Liste mit allen Namen einschließlich last. 
+#Namen die mit a beginnen dürfen nicht in der Liste vorkommen.
+
 def process(names:str, last:str, notStartingWith:str)->list[str]:
     names = names.replace(", ", ",")
     ls = names.split(",")
@@ -38,6 +43,9 @@ process("Andrea,Barbara", "NotInList", "Bar")
 #Implement a procedure "toDict" that takes a list of names (as returned by "process" from Task1)
 #and returns a dictionary containing the names as keys and the number of characters of each respective name as value
 
+#Implementiere eine Funktion die eine Namensliste entgegennimmt
+#und ein Dictionary zurückgibt, dass die Namen als Schlüssel in ihrer Zeichenlänge zurückgibt.
+
 def toDict(xy):
     ergebnis = {}
     for names in xy: 
@@ -57,7 +65,8 @@ print (toDict(a))
 
 #Task 3
 #Implement a procedure "toListSkipLowerCase" that uses list comprehension to turn a tuple of strings into a list of strings. At this, strings that start with a lower-case letter shall be skipped.
-#
+#Implementiere eine Funktion die mit einer List Comprehension ein Tuple von Strings in eine Liste von Strings umwandelt.
+#Strings die mit einem Kleinbuchstaben beginnen sollen übersprungen werden.
 
 def toListSkipLowerCase(tuple): 
     newlist = [i for i in tuple if i[0].isupper()]    
@@ -78,6 +87,9 @@ toListSkipLowerCase(("hans", "max"))
 #Implement a procedure "applyFuncToAll" that takes a function "func" and a list of items "lst"
 #and returns a list of the results after applying "func" to each item of "lst".
 
+#Implementiere eine Funktion die die Funktion func und eine liste entgegennimmt. 
+#Zurückgegeben wird eine Liste mit den Ergebnissen nachdem func und jedes Element von lst angewendet wurde.
+
 def applyFuncToAll(func, lst):
     results = [func(i) for i in lst]
     return results
@@ -95,6 +107,10 @@ applyFuncToAll(len, ["a","bb","ccc"])
 
 #Task 5
 #Implement a procedure "swallowException" that takes a function "func" and returns the value that is returned when executing "func". In case the execution of func raises a "division-by-zero" execption, the returned value shall be the string "only chuck norris is allowed to divide by zero". In case another exception occurs, the returned value shall be the string "something went wrong".
+
+#Implementiere eine Funktion die func entegegennimmt und deren Rückgabewert beim Ausführen liefert.
+#Löst die Ausführung von func "eine Division durch Null"-Exception aus, so soll der Rückgabewert der String "only chuck norris is allowed to divide by zero" sein.
+#Bei jeder anderen Exception soll der String "something went wrong" zurückgegeben werden.
 
 def swallowException(func):
     try:
