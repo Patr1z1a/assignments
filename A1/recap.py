@@ -118,8 +118,8 @@ def swallowException(func):
         return v
     except ZeroDivisionError:
         return "only chuck norris is allowed to divide by zero"
-    except Exception:
-        return "something went wrong"
+    except Exception as e:
+        return e
     
     
 #Examples:
