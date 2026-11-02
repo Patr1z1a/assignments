@@ -8,33 +8,56 @@
 # Task 1: File Reading
 # ================================
 
-def read_grades(filename):
+def read_grades(filename:str)->list[tuple[int,str,int]]:
     """
-    Reads the CSV file and returns a list of tuples (student_id, name, grade).
-    Handles file-not-found gracefully: Log the error to the console and return an empty list.
+        Reads the CSV file and returns a list of tuples (student_id, name, grade).
+        Handles file-not-found gracefully: Log the error to the console and return an empty list.
     """
-    # TODO: Implement
-    return []
+    ls:list[tuple[int,str,int]] = []
+    try:
+        with open(filename, "r") as f:
+            for line in f:
+                cells = line.split(";")
+                if len(cells) == 3:
+                    student_id:int = int(cells[0])
+                    student_name:str = cells[1]
+                    student_grade:int = int(cells[2])
+                    tup = (student_id,student_name, student_grade)
+                    ls.append(tup)
+    except FileNotFoundError as f:
+        print(f)
+    return ls
 
-
+line = read_grades("A3/grades.csv")
 # ================================
 # Task 2: Filtering and Transformations
 # the parameter 'students' is a list
 # ================================
 
-def filter_passing(students):
+def filter_passing(students:list[tuple[int,str,int]]):
     """
     Filters and returns students with grade >= 60.
     """
-    # TODO: Implement
-    return []
+    passing:list[tuple[int,str,int]] = []
+    for i in line:
+        if i[2] >= 80:
+            passing.append(i)
+    return passing
+filter_passing(line)
 
-def to_name_grade_dict(students):
+
+
+def to_name_grade_dict(students:list[tuple[int,str,int]]):
     """
     Converts list of tuples to a dictionary {name: grade}.
     """
-    # TODO: Implement
-    return {}
+    suddic:dict[str, int] = {}
+    for i in line:
+        student_name:str = i[1]
+        student_grade:int = i[2]
+        suddic.update({student_name: student_grade})
+    print(suddic)
+    return suddic
 
 def curve_grades(students, curve_by):
     """
