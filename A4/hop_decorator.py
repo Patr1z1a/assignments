@@ -92,8 +92,18 @@ helperfunction(1,2)
 
 import time
 
+def timeMe(func):
+  def inner(*args):
+      zeitstart = time.time()
+      start = func(*args)
+      zeitende = time.time()
+      print(f"@timeMe: {((zeitende - zeitstart)*1000):.2f} Milliseconds")
+      return start
+  return inner  
+
+
 #The following code:
-'''
+
 @timeMe
 def testFunctionTime():
   sum = 0
@@ -111,10 +121,10 @@ def testFunctionTime3(*args):
     s+= a
   time.sleep(s)  
 
-testFunctionTime()
-testFunctionTime2(1)
-testFunctionTime3(1,2,3)
-'''
+#testFunctionTime()
+#testFunctionTime2(1)
+#testFunctionTime3(1,2,3)
+
 
 #shall provide the following output (note that your values will slightly differ):
 '''
@@ -138,16 +148,23 @@ testFunctionTime3(1,2,3)
 
 
 #calcultes the n-th fibonacci number
-
-#@memo   #todo uncomment after implementing memo
+def memo(func):
+  memory = {}
+  def inner(n:int):
+    if n not in memory:
+      memory[n] = func(n)
+    return memory[n]
+  return inner
+    
+@memo   #todo uncomment after implementing memo
 def fib(n):
   if n < 2:
     return n
   else:
     return fib(n-1) + fib(n-2) 
 
-#fib(5)
-#fib(35)
+print(fib(5))
+print(fib(35))
 #list(map(fib, range(20)))
 
 
