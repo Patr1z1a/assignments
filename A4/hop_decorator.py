@@ -19,9 +19,21 @@ def square(x):
 
 def average(x, y):
     return (x+y)/2
-    
+
 def newton(x):
-  return None  ##TODO
+  def isGoodEnough(guess):
+    return abs(square(guess) - x) < 0.001
+
+  def improve(guess):
+      return average(guess, x/guess)
+
+  def sqrtIter(guess):
+      if isGoodEnough(guess):
+          return guess
+      else:
+          return sqrtIter(improve(guess))
+
+  return sqrtIter(1.0)
   
 
 ##########################################################################
@@ -31,8 +43,14 @@ def newton(x):
 #Try a python-style approach, but keep the basic mode of operation (it shall still be an iterative improvement; do not simply use something like math.sqrt(x) or x ** 0.5)
 
 def newtonPy(x):
-  return None
-  
+  guess = 1.0
+  while abs(guess2 - x) >= 0.001:
+     guess = (guess + x / guess) /2
+  return guess
+
+if name == "main":
+    print("Wurzel aus 4:", newton(4))
+    print("Wurzel aus 9:", newton(9))
 
 ##########################################################################
 

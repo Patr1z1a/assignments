@@ -89,7 +89,7 @@ def print_statistics(students:list[tuple[int,str,int]]):
     try:
         num:int = len(students)
         addedgrades:int = 0
-        lowest:int = 9999999
+        lowest:int = 9999
         lowest_name:str = str("x")
         highest:int = 0
         highest_name:str = "y"
