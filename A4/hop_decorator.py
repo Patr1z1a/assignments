@@ -14,6 +14,9 @@
 #Get rid of unnecessary parameters (remember that the outer function defines a scope that spans also over the inner functions)
 #Do not simplify the code otherwise (e.g., do not get rid of the functions 'square' or 'average')
 
+
+
+
 def square(x):
     return x*x
 
@@ -48,7 +51,7 @@ def newtonPy(x):
      guess = (guess + x / guess) /2
   return guess
 
-if name == "main":
+if __name__ == "__main__":
     print("Wurzel aus 4:", newton(4))
     print("Wurzel aus 9:", newton(9))
 
@@ -58,13 +61,23 @@ if name == "main":
 #Write a decorator 'log' that logs the invokation of functions (with parameters and result) as follows:
 
 #Example: The following code
-'''
+
+def log(func):
+    def inner(*args):
+        ergebnis = func(*args)
+        args_str = str(args).replace(" ", "")
+        print(f"@log: {func.__name__}{args_str} -> {ergebnis}")
+        return ergebnis
+    return inner
+
+
 @log
 def helperfunction(a, b):
   return a+b
 
 helperfunction(1,2)
-'''
+
+
 #shall provide the following output (Note: make sure that the returned value of the decorated function is not lost; see last output line!):
 '''
 @log: helperfunction(1,2) -> 3
