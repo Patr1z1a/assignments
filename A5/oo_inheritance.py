@@ -13,43 +13,56 @@
 # Implement the whole functionality for this assignment in this file!
 # Modify and add to the provided code!
 
+
+  
 class Account:
-    def init(self, owner: str):
+
+    def __init__(self, owner: str):
         self.owner = owner
-        self.balance = 0.0
+        self.__balance = 0.0
 
     @property
     def balance(self) -> float:
-        return self.balance
+        return self.__balance
 
     def deposit(self, amount: float):
-        if amount < 0: 
+        if amount < 0:
             raise ValueError("Derf ned negativ sei")
-        else: 
-            self.balance += amount
+        else:
+            self.__balance += amount
 
     def withdraw(self, amount: float):
-        if amount < 0: 
+        if amount < 0:
             raise ValueError("Derf ned negativ sei")
-        else: 
-            self.balance -= amount
+        else:
+            self.__balance -= amount
 
-    def str(self) -> str:
+    def __str__(self) -> str:
         return f"Account({self.owner}: {self.__balance:.2f} EUR)"
 
-#hallo lldl
+    @staticmethod
+    def transfer(amount: float, fromAccount:Account, toAccount:Account):
+        if amount < 0:
+            raise ValueError("Derf ned negativ sei")
+
+        fromAccount.withdraw(amount)
+        toAccount.deposit(amount)
 
 
 class StudentAccount(Account):
 
     def withdraw(self, amount: float):
+        if amount < 0:
+            raise ValueError("Derf ned negativ sei")
+
         if amount > self.balance:
             raise ValueError("Geht ned")
         else:
-            return super().withdraw(amount)
+            super().withdraw(amount)
+
     
     
-'''
+
 ##################### Demo ############
 
 a1 = Account("A")
@@ -76,4 +89,3 @@ except:
   print("Fehler") ##TODO where should the error message come from?
 print(s1)
 print(a1)
-'''
