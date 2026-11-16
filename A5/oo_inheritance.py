@@ -14,11 +14,39 @@
 # Modify and add to the provided code!
 
 class Account:
-    pass
+    def init(self, owner: str):
+        self.owner = owner
+        self.balance = 0.0
 
-class StudentAccount:
-    pass
+    @property
+    def balance(self) -> float:
+        return self.balance
 
+    def deposit(self, amount: float):
+        if amount < 0: 
+            raise ValueError("Derf ned negativ sei")
+        else: 
+            self.balance += amount
+
+    def withdraw(self, amount: float):
+        if amount < 0: 
+            raise ValueError("Derf ned negativ sei")
+        else: 
+            self.balance -= amount
+
+    def str(self) -> str:
+        return f"Account({self.owner}: {self.__balance:.2f} EUR)"
+
+
+
+
+class StudentAccount(Account):
+
+    def withdraw(self, amount: float):
+        if amount > self.balance:
+            raise ValueError("Geht ned")
+        else:
+            return super().withdraw(amount)
     
     
 '''
