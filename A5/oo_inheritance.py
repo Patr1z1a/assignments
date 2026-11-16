@@ -37,7 +37,7 @@ class Account:
     def str(self) -> str:
         return f"Account({self.owner}: {self.__balance:.2f} EUR)"
 
-#hallo
+#hallo lldl
 
 
 class StudentAccount(Account):
