@@ -1,3 +1,5 @@
+import math
+
 ### Assignment basic_oo ###
 
 # s123456_s56789, YourLastname1_YourLastname2       ##TODO
@@ -9,123 +11,84 @@
 #########################
 
 
-#Task 1: map/filter/sum/...
+# Task 1: map/filter/sum/...
 
-#1a:
-#Given a list of numbers lst that represent temperature values in fahrenheit. Write a procedure toCelsius that converts this list into Celsius scale. Note: the celsius-list shall be returned (not printed).
-#Important: use the procedure 'map' 
-#Example: [-40, 32, 50] --> [-40.0, 0.0, 10.0]
-
+# 1a:
 def toCelsiusMap(lst):
-  pass
-
-#toCelsiusMap([-40, 32, 50])
+    return list(map(lambda f: (f - 32) * 5 / 9, lst))
 
 
-#1b:
-#Implement the conversion to celsius by using list comprehension (instead of map).
-
+# 1b:
 def toCelsiusLC(lst):
-  pass
+    return [(f - 32) * 5 / 9 for f in lst]
 
 
-#1c: 
-#Implement a procedure mathFunc() that returns the result of the formula given in image basic_oo_formula.png. 
-#The "%" sign represents the "modulo"-operator (.... Rest bei einer Division) and "==" simply means "equals".
-#The upper and the lower bound shall be provided as arguments.
-#Note there exists a procedure that sums all values in a list
-#Important: use the procedures 'map' and 'filter'
-
+# 1c:
 def mathFuncMapFilter(lowerBound, upperBound):
-  result = 0 #todo
-  return result
-    
-#1d:
-#Implement the formula (1c) by using list comprehension (it should be one line!)
+    even_numbers = filter(lambda i: i % 2 == 0, range(lowerBound, upperBound + 1))
+    cubed_numbers = map(lambda i: i ** 3, even_numbers)
+    result = sum(cubed_numbers)
+    return result
 
+
+# 1d:
 def mathFuncLC(lowerBound, upperBound):
-  return 0
+    return sum([i ** 3 for i in range(lowerBound, upperBound + 1) if i % 2 == 0])
+
 
 ##########################################################################
 
-#Task 2
-# Create a class "Person" that has three attributes (instance variables): "name", "comment" and "id".
-# The class shall have a constructor such that a Person-object can be created with "p = Person("aName", 4)", where "aName" is the name of the person and 4 is its id.
-# Furthermore, invoking the statement print(p) should lead to the following output "aName (id = 4)".
-# Finally, a person shall be renamable by invoking p.rename("newName")
+# Task 2
 class Person:
-    pass
+    def __init__(self, name, id, comment=""):
+        self.name = name
+        self.id = id
+        self.comment = comment
 
-#Example. This code:
-#p = Person("aName", 4)
-#p.rename("aNewName")
-#print(p)
-#shall lead to the following output:   aNewName (id=4)
+    def rename(self, newName):
+        self.name = newName
+
+    def __str__(self):
+        return f"{self.name} (id={self.id})"
 
 
 ##########################################################################
 
-
-#Task 3
-# Implement a procedure "toObjectList" that takes a list of names (strings) and returns a list of Person objects, 
-# where the "name"-attribute of each person matches the given name, and the "id"-attribute of a person shall be the index in the name list.
-
+# Task 3
 def toObjectList(names):
-    return []
-
-#Example: the following code
-oL = toObjectList(['Thomas', 'Michael', 'Thomas'])
-for p in oL:
-  print(p)
-
-#shall output:
-#Thomas (id=0)
-#Michael (id=1)
-#Thomas (id=2)
+    return [Person(name, index) for index, name in enumerate(names)]
 
 
 ##########################################################################
 
-
-#Task 4
-#Implement a procedure "getDuplicatesAlphabetical" that take a list of person objects and returns a tuple containing all the names that appear multiple times
-#at this, the names in the tuple shall be sorted alphabetically
-
+# Task 4
 def getDuplicatesAlphabetical(listOfPersonObjects):
-  return None
-
-#Example
-getDuplicatesAlphabetical(toObjectList(['Thomas', 'Michael', 'Thomas','Susanne','Michael','Thomas','Alfred','Alfred']))
-#shall output: ('Alfred', 'Michael', 'Thomas')
-
+    names = [person.name for person in listOfPersonObjects]
+    duplicates = {name for name in names if names.count(name) > 1}
+    return tuple(sorted(duplicates))
 
 
 ##########################################################################
 
-#Task 5: Implement a class that represents 2D-points (i.e., a point that has an x- and a y- position).
-#Implement the following methods:
-#  distanceFromOrigin(): calculates and returns the distance to Point2D(0,0). Hint: pythagorean theorem
-#  halfway(target): returns an instance of Point2D that represents the point in the middle of this point (self) and another Point2D (target)  
-#  getX(): returns the x-position
-#  getY(): returns the y-position
-#  __repr__: find out what __repr__ usually is used for and implement it accordingly, such that your output meets the output provided below
-
+# Task 5
 class Point2D:
-  pass
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
 
-#this code
-'''
-p = Point2D(3,4)
-print(p.distanceFromOrigin())
-print(p.halfway(Point2D(0,0)))
-print(p.getX() * 100)
-print([Point2D(1,1), Point2D(2,2), Point2D(3,3)])
-'''
-#shall produce the following output
-'''
-5.0
-(1.5, 2.0)
-300.0
-[(1, 1), (2, 2), (3, 3)]
-'''
+    def distanceFromOrigin(self):
+        return math.sqrt(self.x ** 2 + self.y ** 2)
 
+    def halfway(self, target):
+        mid_x = (self.x + target.x) / 2
+        mid_y = (self.y + target.y) / 2
+        return Point2D(mid_x, mid_y)
+
+    def getX(self):
+        return self.x
+
+    def getY(self):
+        return self.y
+
+    def __repr__(self):
+        return f"({self.x}, {self.y})"
